@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flutter MAD Lab Study Guide – All 29 Experiments</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; background: #f5f7fa; color: #222; }
+  h1 { background: #1565C0; color: white; padding: 20px; border-radius: 8px; text-align: center; }
+  h2 { background: #1976D2; color: white; padding: 10px 16px; border-radius: 6px; margin-top: 36px; }
+  .exp { background: white; border-left: 5px solid #1976D2; border-radius: 6px; margin: 18px 0; padding: 18px 22px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .exp h3 { color: #1565C0; margin-top: 0; }
+  .explain { background: #E3F2FD; border-radius: 5px; padding: 10px 14px; margin-bottom: 10px; font-size: 14px; }
+  pre { background: #263238; color: #ECEFF1; border-radius: 6px; padding: 14px 18px; overflow-x: auto; font-size: 13px; line-height: 1.6; }
+  code { font-family: 'Courier New', monospace; }
+  .tip { background: #FFF8E1; border-left: 4px solid #FFC107; padding: 8px 14px; border-radius: 4px; margin-top: 8px; font-size: 13px; }
+  .badge { display:inline-block; background:#1565C0; color:white; border-radius:12px; padding:2px 10px; font-size:12px; margin-right:6px; }
+  .toc { background: white; border-radius: 8px; padding: 18px 24px; margin-bottom: 28px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+  .toc a { color: #1565C0; text-decoration: none; display: inline-block; margin: 3px 10px; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<h1>📱 Flutter MAD &amp; PWA Lab – All 29 Experiments<br><small style="font-size:16px;">Finolex Academy of Management and Technology, Ratnagiri</small></h1>
+
+<div class="toc">
+  <b>📋 Quick Navigation:</b><br>
+  <a href="#exp1">1. SafeArea</a> <a href="#exp2">2. AppBar</a> <a href="#exp3">3. Row</a> <a href="#exp4">4. Column</a>
+  <a href="#exp5">5. Container (child)</a> <a href="#exp6">6. Container (color)</a> <a href="#exp7">7. Container (size)</a>
+  <a href="#exp8">8. Container (margin)</a> <a href="#exp9">9. Container (padding)</a> <a href="#exp10">10. Container (alignment)</a>
+  <a href="#exp11">11. Container (decoration)</a> <a href="#exp12">12. Container (transform)</a>
+  <a href="#exp13">13. FlatButton</a> <a href="#exp14">14. RaisedButton</a> <a href="#exp15">15. FloatingActionButton</a>
+  <a href="#exp16">16. DropdownButton</a> <a href="#exp17">17. IconButton</a> <a href="#exp18">18. RichText</a>
+  <a href="#exp19">19. Container (full)</a> <a href="#exp20">20. GridView</a> <a href="#exp21">21. ListView</a>
+  <a href="#exp22">22. Stack</a> <a href="#exp23">23. Card</a> <a href="#exp24">24. ListTile</a>
+  <a href="#exp25">25. Icons</a> <a href="#exp26">26. Image.asset</a> <a href="#exp27">27. Navigation</a>
+  <a href="#exp28">28. Image.asset (2)</a> <a href="#exp29">29. Gestures</a>
+</div>
+
+<!-- =================== EXP 1 =================== -->
+<div class="exp" id="exp1">
+<h3>🧪 Experiment 1 – SafeArea Widget</h3>
+<div class="explain">
+  <b>What is SafeArea?</b> SafeArea adds padding so your content doesn't go behind the phone's status bar, notch, or home button area. Think of it as a "safe zone" for your UI.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Text(
+          'This text is inside SafeArea!',
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Always wrap your main content in <code>SafeArea</code> to avoid UI elements hiding behind the status bar or notch.</div>
+</div>
+
+<!-- =================== EXP 2 =================== -->
+<div class="exp" id="exp2">
+<h3>🧪 Experiment 2 – AppBar Widget</h3>
+<div class="explain">
+  <b>What is AppBar?</b> AppBar is the top navigation bar of an app — it shows the title, back button, and action icons.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My First AppBar'),
+        backgroundColor: Colors.blue,
+        leading: Icon(Icons.menu),
+        actions: [
+          Icon(Icons.search),
+          SizedBox(width: 10),
+          Icon(Icons.more_vert),
+        ],
+      ),
+      body: Center(child: Text('Hello World!')),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>leading</code> = left side icon. <code>actions</code> = right side icons list.</div>
+</div>
+
+<!-- =================== EXP 3 =================== -->
+<div class="exp" id="exp3">
+<h3>🧪 Experiment 3 – Row Widget</h3>
+<div class="explain">
+  <b>What is Row?</b> Row arranges its children <b>horizontally</b> (left to right). Like putting items side by side on a shelf.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Row Widget')),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Icon(Icons.star, size: 50, color: Colors.red),
+          Icon(Icons.star, size: 50, color: Colors.green),
+          Icon(Icons.star, size: 50, color: Colors.blue),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>mainAxisAlignment</code> controls horizontal spacing. <code>crossAxisAlignment</code> controls vertical alignment.</div>
+</div>
+
+<!-- =================== EXP 4 =================== -->
+<div class="exp" id="exp4">
+<h3>🧪 Experiment 4 – Column Widget</h3>
+<div class="explain">
+  <b>What is Column?</b> Column arranges its children <b>vertically</b> (top to bottom). Like stacking items in a list.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Column Widget')),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('First Item', style: TextStyle(fontSize: 20)),
+          SizedBox(height: 10),
+          Text('Second Item', style: TextStyle(fontSize: 20)),
+          SizedBox(height: 10),
+          Text('Third Item', style: TextStyle(fontSize: 20)),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Use <code>SizedBox(height: 10)</code> to add space between column items.</div>
+</div>
+
+<!-- =================== EXP 5 =================== -->
+<div class="exp" id="exp5">
+<h3>🧪 Experiment 5 – Container with child property</h3>
+<div class="explain">
+  <b>What is Container?</b> Container is a box that can hold one child widget and be styled in many ways. <code>child</code> is the widget inside the container.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Child')),
+      body: Center(
+        child: Container(
+          child: Text(
+            'I am inside a Container!',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Container can only hold <b>one</b> child. Use Row/Column inside it for multiple children.</div>
+</div>
+
+<!-- =================== EXP 6 =================== -->
+<div class="exp" id="exp6">
+<h3>🧪 Experiment 6 – Container with color property</h3>
+<div class="explain">
+  <b>Color property</b> sets the background color of the container.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Color')),
+      body: Center(
+        child: Container(
+          color: Colors.amber,
+          child: Text(
+            'Yellow Container!',
+            style: TextStyle(fontSize: 22),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> You cannot use both <code>color</code> and <code>decoration</code> at the same time. Use one or the other.</div>
+</div>
+
+<!-- =================== EXP 7 =================== -->
+<div class="exp" id="exp7">
+<h3>🧪 Experiment 7 – Container with height and width</h3>
+<div class="explain">
+  <b>height</b> and <b>width</b> set the exact size of the container in logical pixels.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Height & Width')),
+      body: Center(
+        child: Container(
+          height: 150,
+          width: 200,
+          color: Colors.teal,
+          child: Center(
+            child: Text('150 x 200 Box', style: TextStyle(color: Colors.white, fontSize: 18)),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> If you don't set height/width, the container wraps its child's size.</div>
+</div>
+
+<!-- =================== EXP 8 =================== -->
+<div class="exp" id="exp8">
+<h3>🧪 Experiment 8 – Container with margin property</h3>
+<div class="explain">
+  <b>margin</b> is the space <b>outside</b> the container — the gap between this container and other widgets around it.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Margin')),
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(20),
+            color: Colors.purple,
+            height: 80,
+            child: Center(child: Text('Box with margin', style: TextStyle(color: Colors.white))),
+          ),
+          Container(
+            color: Colors.orange,
+            height: 80,
+            child: Center(child: Text('Box without margin')),
+          ),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>EdgeInsets.all(20)</code> adds equal margin on all sides. Use <code>EdgeInsets.only(top:10, left:20)</code> for specific sides.</div>
+</div>
+
+<!-- =================== EXP 9 =================== -->
+<div class="exp" id="exp9">
+<h3>🧪 Experiment 9 – Container with padding property</h3>
+<div class="explain">
+  <b>padding</b> is the space <b>inside</b> the container — the gap between the container's border and its child.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Padding')),
+      body: Center(
+        child: Container(
+          color: Colors.green,
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+          child: Text(
+            'Text with Padding!',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Margin = outside space. Padding = inside space.</b> Remember: M = external gap, P = internal gap.</div>
+</div>
+
+<!-- =================== EXP 10 =================== -->
+<div class="exp" id="exp10">
+<h3>🧪 Experiment 10 – Container with alignment property</h3>
+<div class="explain">
+  <b>alignment</b> controls where the child is positioned <b>inside</b> the container.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Alignment')),
+      body: Container(
+        height: 300,
+        width: double.infinity,
+        color: Colors.lightBlue,
+        alignment: Alignment.bottomRight,
+        child: Text(
+          'Bottom Right!',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Alignment options:</b> <code>topLeft</code>, <code>topCenter</code>, <code>topRight</code>, <code>center</code>, <code>bottomLeft</code>, <code>bottomCenter</code>, <code>bottomRight</code></div>
+</div>
+
+<!-- =================== EXP 11 =================== -->
+<div class="exp" id="exp11">
+<h3>🧪 Experiment 11 – Container with decoration property</h3>
+<div class="explain">
+  <b>decoration</b> lets you add border, border radius, shadow, and gradient to a container. Use <code>BoxDecoration</code>.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Decoration')),
+      body: Center(
+        child: Container(
+          height: 150,
+          width: 220,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.deepPurple,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10,
+                offset: Offset(4, 4),
+              ),
+            ],
+          ),
+          child: Text(
+            'Decorated Box!',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Never use <code>color</code> property on Container when using <code>decoration</code>. Put the color inside <code>BoxDecoration</code>.</div>
+</div>
+
+<!-- =================== EXP 12 =================== -->
+<div class="exp" id="exp12">
+<h3>🧪 Experiment 12 – Container with transform property</h3>
+<div class="explain">
+  <b>transform</b> applies a matrix transformation — like rotating or tilting the container.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Transform')),
+      body: Center(
+        child: Container(
+          height: 150,
+          width: 200,
+          color: Colors.orange,
+          alignment: Alignment.center,
+          transform: Matrix4.rotationZ(0.2), // Rotate by ~11 degrees
+          child: Text(
+            'Rotated Box!',
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>Matrix4.rotationZ(0.2)</code> rotates around Z-axis. Value is in radians (pi = 180°).</div>
+</div>
+
+<!-- =================== EXP 13 =================== -->
+<div class="exp" id="exp13">
+<h3>🧪 Experiment 13 – FlatButton Widget</h3>
+<div class="explain">
+  <b>Note:</b> FlatButton is deprecated in newer Flutter. Use <code>TextButton</code> instead. Both are shown below.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('FlatButton / TextButton')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Modern replacement for FlatButton
+            TextButton(
+              onPressed: () {
+                print('TextButton pressed!');
+              },
+              child: Text('Click Me (TextButton)', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+            TextButton(
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              onPressed: () {},
+              child: Text('Red TextButton', style: TextStyle(fontSize: 18)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Exam Tip:</b> If asked for FlatButton, write TextButton — examiners accept it since FlatButton is deprecated.</div>
+</div>
+
+<!-- =================== EXP 14 =================== -->
+<div class="exp" id="exp14">
+<h3>🧪 Experiment 14 – RaisedButton Widget</h3>
+<div class="explain">
+  <b>Note:</b> RaisedButton is deprecated. Use <code>ElevatedButton</code> instead — it has a raised/3D appearance.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('RaisedButton / ElevatedButton')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                print('Button Pressed!');
+              },
+              child: Text('Elevated Button', style: TextStyle(fontSize: 18)),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              ),
+              onPressed: () {},
+              child: Text('Green Button', style: TextStyle(fontSize: 18, color: Colors.white)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Exam Tip:</b> ElevatedButton = modern RaisedButton. Use <code>backgroundColor</code> inside <code>styleFrom()</code> to change color.</div>
+</div>
+
+<!-- =================== EXP 15 =================== -->
+<div class="exp" id="exp15">
+<h3>🧪 Experiment 15 – Floating Action Button</h3>
+<div class="explain">
+  <b>FloatingActionButton (FAB)</b> is the round button that floats above the content, usually at the bottom right. Very common in Material Design apps.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Floating Action Button')),
+      body: Center(child: Text('Press the + button below!', style: TextStyle(fontSize: 20))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('FAB Pressed!');
+        },
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> FAB is placed as a property of <code>Scaffold</code>, not inside body. Use <code>floatingActionButtonLocation</code> to move it.</div>
+</div>
+
+<!-- =================== EXP 16 =================== -->
+<div class="exp" id="exp16">
+<h3>🧪 Experiment 16 – DropdownButton Widget</h3>
+<div class="explain">
+  <b>DropdownButton</b> shows a list of options when clicked, and the user selects one. Requires StatefulWidget because the selected value changes.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String selectedValue = 'Apple';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Dropdown Button')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Selected: $selectedValue', style: TextStyle(fontSize: 22)),
+            SizedBox(height: 20),
+            DropdownButton<String>(
+              value: selectedValue,
+              items: ['Apple', 'Banana', 'Mango', 'Orange']
+                  .map((fruit) => DropdownMenuItem(value: fruit, child: Text(fruit)))
+                  .toList(),
+              onChanged: (newValue) {
+                setState(() {
+                  selectedValue = newValue!;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Key Concept:</b> Dropdown needs <code>StatefulWidget</code> + <code>setState()</code> to update the selected value on screen.</div>
+</div>
+
+<!-- =================== EXP 17 =================== -->
+<div class="exp" id="exp17">
+<h3>🧪 Experiment 17 – IconButton Widget</h3>
+<div class="explain">
+  <b>IconButton</b> is a button that displays an icon. It shows a ripple effect when tapped.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Icon Button')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: Icon(Icons.favorite, color: Colors.red, size: 50),
+              onPressed: () {
+                print('Heart tapped!');
+              },
+            ),
+            Text('Tap the Heart!', style: TextStyle(fontSize: 18)),
+            SizedBox(height: 20),
+            IconButton(
+              icon: Icon(Icons.share, color: Colors.blue, size: 40),
+              onPressed: () {},
+              tooltip: 'Share',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>tooltip</code> shows a label when user long-presses the button. Very useful for accessibility.</div>
+</div>
+
+<!-- =================== EXP 18 =================== -->
+<div class="exp" id="exp18">
+<h3>🧪 Experiment 18 – RichText Widget</h3>
+<div class="explain">
+  <b>RichText</b> allows you to display text with <b>different styles in the same line</b> — like bold some words, color others.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('RichText Widget')),
+      body: Center(
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(fontSize: 22, color: Colors.black),
+            children: [
+              TextSpan(text: 'Hello '),
+              TextSpan(
+                text: 'Flutter ',
+                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
+              TextSpan(text: 'World! '),
+              TextSpan(
+                text: 'This is RichText.',
+                style: TextStyle(color: Colors.red, fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Use <code>RichText</code> when you want multiple text styles in a single line. Each part is a <code>TextSpan</code>.</div>
+</div>
+
+<!-- =================== EXP 19 =================== -->
+<div class="exp" id="exp19">
+<h3>🧪 Experiment 19 – Container Widget (full demo)</h3>
+<div class="explain">
+  Combine multiple Container properties together in one complete example.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Container - Full Demo')),
+      body: Center(
+        child: Container(
+          height: 180,
+          width: 280,
+          margin: EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue, Colors.purple],
+            ),
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 8)],
+          ),
+          child: Text(
+            'Full Container Demo!',
+            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 This combines margin, padding, alignment, decoration (gradient, borderRadius, boxShadow) — great for exam!</div>
+</div>
+
+<!-- =================== EXP 20 =================== -->
+<div class="exp" id="exp20">
+<h3>🧪 Experiment 20 – GridView Widget</h3>
+<div class="explain">
+  <b>GridView</b> displays items in a 2D grid (rows and columns). Like a photo gallery layout.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('GridView')),
+      body: GridView.count(
+        crossAxisCount: 2,       // 2 columns
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        padding: EdgeInsets.all(10),
+        children: List.generate(8, (index) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.primaries[index % Colors.primaries.length],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: Text(
+                'Item ${index + 1}',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>crossAxisCount: 2</code> means 2 columns. Change it to 3 for 3 columns. <code>List.generate(8, ...)</code> creates 8 items.</div>
+</div>
+
+<!-- =================== EXP 21 =================== -->
+<div class="exp" id="exp21">
+<h3>🧪 Experiment 21 – ListView Widget</h3>
+<div class="explain">
+  <b>ListView</b> shows a scrollable list of items, like a WhatsApp chat list or a contacts list.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  final List&lt;String&gt; fruits = ['Apple', 'Banana', 'Mango', 'Orange', 'Grapes', 'Pineapple'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('ListView')),
+      body: ListView.builder(
+        itemCount: fruits.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: Icon(Icons.local_florist, color: Colors.green),
+            title: Text(fruits[index], style: TextStyle(fontSize: 18)),
+            trailing: Icon(Icons.arrow_forward_ios),
+          );
+        },
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Use <code>ListView.builder</code> for large lists — it only builds items visible on screen (efficient). <code>ListView(children: [])</code> builds all at once.</div>
+</div>
+
+<!-- =================== EXP 22 =================== -->
+<div class="exp" id="exp22">
+<h3>🧪 Experiment 22 – Stack Widget</h3>
+<div class="explain">
+  <b>Stack</b> places widgets on top of each other, like layers in Photoshop. The last child is on top.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Stack Widget')),
+      body: Center(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 200,
+              width: 200,
+              color: Colors.blue,
+            ),
+            Container(
+              height: 150,
+              width: 150,
+              color: Colors.red,
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.yellow,
+              child: Center(child: Text('TOP', style: TextStyle(fontWeight: FontWeight.bold))),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Use <code>Positioned</code> widget inside Stack to place items at exact positions (top, left, right, bottom).</div>
+</div>
+
+<!-- =================== EXP 23 =================== -->
+<div class="exp" id="exp23">
+<h3>🧪 Experiment 23 – Card Widget</h3>
+<div class="explain">
+  <b>Card</b> is a material design card — a rounded box with a shadow. Used for displaying information blocks.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Card Widget')),
+      body: Center(
+        child: Card(
+          elevation: 8,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          margin: EdgeInsets.all(20),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.person, size: 60, color: Colors.blue),
+                SizedBox(height: 10),
+                Text('John Doe', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text('Flutter Developer', style: TextStyle(color: Colors.grey, fontSize: 16)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>elevation</code> controls the shadow depth. Higher = more shadow. <code>RoundedRectangleBorder</code> makes rounded corners.</div>
+</div>
+
+<!-- =================== EXP 24 =================== -->
+<div class="exp" id="exp24">
+<h3>🧪 Experiment 24 – ListTile Widget</h3>
+<div class="explain">
+  <b>ListTile</b> is a pre-built row widget for lists — has leading icon, title, subtitle, and trailing icon slots.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('ListTile Widget')),
+      body: Column(
+        children: [
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.blue,
+              child: Icon(Icons.person, color: Colors.white),
+            ),
+            title: Text('John Doe', style: TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text('Flutter Developer'),
+            trailing: Icon(Icons.phone, color: Colors.green),
+            onTap: () { print('Tapped John!'); },
+          ),
+          Divider(),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.red,
+              child: Icon(Icons.person, color: Colors.white),
+            ),
+            title: Text('Jane Smith'),
+            subtitle: Text('UI/UX Designer'),
+            trailing: Icon(Icons.phone, color: Colors.green),
+          ),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> <code>leading</code> = left. <code>title</code> = main text. <code>subtitle</code> = small text below. <code>trailing</code> = right side. <code>onTap</code> = click action.</div>
+</div>
+
+<!-- =================== EXP 25 =================== -->
+<div class="exp" id="exp25">
+<h3>🧪 Experiment 25 – Flutter Icons</h3>
+<div class="explain">
+  Flutter has 1000+ built-in Material icons available through the <code>Icons</code> class. No internet needed!
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Flutter Icons')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.home, size: 50, color: Colors.blue),
+                Icon(Icons.favorite, size: 50, color: Colors.red),
+                Icon(Icons.star, size: 50, color: Colors.amber),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.camera_alt, size: 50, color: Colors.green),
+                Icon(Icons.phone, size: 50, color: Colors.purple),
+                Icon(Icons.share, size: 50, color: Colors.orange),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.email, size: 50, color: Colors.teal),
+                Icon(Icons.settings, size: 50, color: Colors.grey),
+                Icon(Icons.notifications, size: 50, color: Colors.pink),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Tip:</b> Visit <a href="https://fonts.google.com/icons">fonts.google.com/icons</a> to see all available Flutter icons.</div>
+</div>
+
+<!-- =================== EXP 26 =================== -->
+<div class="exp" id="exp26">
+<h3>🧪 Experiment 26 – Image.asset</h3>
+<div class="explain">
+  <b>Image.asset</b> displays an image from your project's local files (assets folder). You must declare it in <code>pubspec.yaml</code>.
+</div>
+<pre><code>// pubspec.yaml - Add this under flutter:
+//   assets:
+//     - assets/my_image.png
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Image.asset')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Local asset image
+            Image.asset(
+              'assets/my_image.png',
+              height: 200,
+              width: 200,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 20),
+            Text('Local Image', style: TextStyle(fontSize: 20)),
+            SizedBox(height: 30),
+            // Network image (bonus)
+            Image.network(
+              'https://flutter.dev/images/flutter-logo-sharing.png',
+              height: 100,
+            ),
+            Text('Network Image', style: TextStyle(fontSize: 16)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Steps:</b> 1) Create <code>assets/</code> folder in project. 2) Add image there. 3) Declare in pubspec.yaml. 4) Use <code>Image.asset('assets/name.png')</code>.</div>
+</div>
+
+<!-- =================== EXP 27 =================== -->
+<div class="exp" id="exp27">
+<h3>🧪 Experiment 27 – Navigation and Routing</h3>
+<div class="explain">
+  <b>Navigation</b> = moving between screens. <code>Navigator.push()</code> goes to next screen. <code>Navigator.pop()</code> goes back.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: HomeScreen()));
+}
+
+// Screen 1 - Home
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Home Screen')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Go to Second Screen', style: TextStyle(fontSize: 18)),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondScreen()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+// Screen 2 - Second
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Second Screen')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Go Back', style: TextStyle(fontSize: 18)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Key:</b> <code>Navigator.push()</code> = go forward. <code>Navigator.pop()</code> = go back. <code>MaterialPageRoute</code> wraps the destination screen.</div>
+</div>
+
+<!-- =================== EXP 28 =================== -->
+<div class="exp" id="exp28">
+<h3>🧪 Experiment 28 – Image.asset (with fit property)</h3>
+<div class="explain">
+  This experiment focuses on the <b>fit</b> property of Image.asset — how the image fills its container.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Image Fit Demo')),
+      body: Column(
+        children: [
+          Text('BoxFit.cover', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Container(
+            height: 150, width: double.infinity, color: Colors.grey[200],
+            child: Image.network(
+              'https://picsum.photos/400/200',
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text('BoxFit.contain', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Container(
+            height: 150, width: double.infinity, color: Colors.grey[200],
+            child: Image.network(
+              'https://picsum.photos/400/200',
+              fit: BoxFit.contain,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text('BoxFit.fill', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Container(
+            height: 150, width: double.infinity, color: Colors.grey[200],
+            child: Image.network(
+              'https://picsum.photos/400/200',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>BoxFit options:</b> <code>cover</code> = fills box (may crop). <code>contain</code> = fits inside (may have gaps). <code>fill</code> = stretches to fill exactly.</div>
+</div>
+
+<!-- =================== EXP 29 =================== -->
+<div class="exp" id="exp29">
+<h3>🧪 Experiment 29 – Gesture Detection</h3>
+<div class="explain">
+  <b>GestureDetector</b> detects touch events: tap, double tap, long press, swipe (drag), etc.
+</div>
+<pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String gestureText = 'Touch the box!';
+  Color boxColor = Colors.blue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Gesture Detector')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(gestureText, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            SizedBox(height: 30),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  gestureText = 'Single Tap!';
+                  boxColor = Colors.green;
+                });
+              },
+              onDoubleTap: () {
+                setState(() {
+                  gestureText = 'Double Tap!';
+                  boxColor = Colors.red;
+                });
+              },
+              onLongPress: () {
+                setState(() {
+                  gestureText = 'Long Press!';
+                  boxColor = Colors.purple;
+                });
+              },
+              child: Container(
+                height: 150,
+                width: 250,
+                color: boxColor,
+                alignment: Alignment.center,
+                child: Text(
+                  'Touch Me!',
+                  style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  gestureText = 'Touch the box!';
+                  boxColor = Colors.blue;
+                });
+              },
+              child: Text('Reset'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<div class="tip">💡 <b>Common gestures:</b> <code>onTap</code>, <code>onDoubleTap</code>, <code>onLongPress</code>, <code>onHorizontalDragUpdate</code>, <code>onVerticalDragUpdate</code>.</div>
+</div>
+
+<hr style="margin-top:40px;">
+<div style="text-align:center; background:#1565C0; color:white; padding:16px; border-radius:8px; margin-top:20px;">
+  <b>📚 All 29 Flutter Lab Experiments – Finolex Academy of Management and Technology, Ratnagiri</b><br>
+  <span style="font-size:14px;">Good luck in your lab exam tomorrow! 🍀</span>
+</div>
+
+</body>
+</html>
